@@ -12,5 +12,17 @@ export default defineMessages({
 	twoPlayers: {
 		id: 'tic-tac-toe.containers.Board.twoPlayers',
 		defaultMessage: 'Two Playes'
+	},
+	doYouWantPlay: {
+		id: 'tic-tac-toe.containers.Board.doYouWantPlay',
+		defaultMessage: 'Do you want play as {X} or {Y}?'
+	},
+	x: {
+		id: 'tic-tac-toe.containers.Board.x',
+		defaultMessage: 'X'
+	},
+	y: {
+		id: 'tic-tac-toe.containers.Board.y',
+		defaultMessage: 'Y'
 	}
 })

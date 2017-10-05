@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Button from 'components/Button'
 
 const Square = ({ value, onClick }) => (
-	<Button onClick={onClick}>
+	<Button onClick={onClick} square>
 		{value}
 	</Button>
 )

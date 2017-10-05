@@ -15,7 +15,7 @@ import StyledButton from './StyledButton'
 function Button(props) {
 	// Render an anchor tag
 	let button = (
-		<A href={props.href} onClick={props.onClick}>
+		<A href={props.href} onClick={props.onClick} xo={props.xo}  square={props.square}>
 			{Children.toArray(props.children)}
 		</A>
 	)
@@ -23,7 +23,7 @@ function Button(props) {
 	// If the Button has a handleRoute prop, we want to render a button
 	if (props.handleRoute) {
 		button = (
-			<StyledButton onClick={props.handleRoute}>
+			<StyledButton onClick={props.handleRoute} xo={props.xo}  square={props.square}>
 				{Children.toArray(props.children)}
 			</StyledButton>
 		)
@@ -36,7 +36,9 @@ Button.propTypes = {
 	handleRoute: PropTypes.func,
 	href: PropTypes.string,
 	onClick: PropTypes.func,
-	children: PropTypes.node
+	children: PropTypes.node,
+	xo: PropTypes.bool,
+	square: PropTypes.bool
 }
 
 export default Button

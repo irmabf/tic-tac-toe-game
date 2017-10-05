@@ -38,8 +38,27 @@ const buttonStyles = css`
 		left: 0;
 		bottom: 0;
 	}
+	${(props) => props.xo && `
+		&:hover {
+			border-color: transparent;
+			border-bottom: 2px solid palevioletred;
+		}
+	`}
 	
-	${(props) => props.square && 'background-color: black'}
+	${(props) => props.square && `
+		border: 2px solid #999;
+		border-radius: 0;
+		float: left;
+		min-width: 140px;
+		min-height: 50px;
+		margin-right: -2px;
+		margin-top: -2px;
+		
+		&:hover {
+			z-index: 999
+		}
+	`}
+
 `
 
 export default buttonStyles

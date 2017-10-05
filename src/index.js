@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
+import 'sanitize.css/sanitize.css'
 
 import LanguageProvider from 'containers/LanguageProvider'
 import store from './store'
