@@ -1,0 +1,16 @@
+/** @module Spacing */
+
+/**
+ * @description Returns an object with properties: top,right, bottom, left, depending of the value
+ * @param {number} top
+ * @param {number} right
+ * @param {number} left
+ * @param {number} bottom
+ */
+
+export const margin = (top = 0, right = 0, bottom = 0, left = 0) => ({
+	top,
+	right,
+	bottom,
+	left
+})

@@ -1,11 +1,7 @@
 import styled from 'styled-components'
 
 const Row = styled.div`
- &:after {
- 	clear: both;
-  content: "";
-  display: table;
- }
+	display:flex
 `
 
 export default Row

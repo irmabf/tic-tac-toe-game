@@ -12,10 +12,18 @@ import PropTypes from 'prop-types'
 import A from './A'
 import StyledButton from './StyledButton'
 
-function Button(props) {
+function Button({
+	xo = false,
+	square = false,
+	top = 0,
+	bottom = 0,
+	left = 0,
+	right = 0,
+	...props
+}) {
 	// Render an anchor tag
 	let button = (
-		<A href={props.href} onClick={props.onClick} xo={props.xo}  square={props.square}>
+		<A href={props.href} onClick={props.onClick} {...{xo, square, top, bottom, left, right}}>
 			{Children.toArray(props.children)}
 		</A>
 	)
@@ -23,7 +31,7 @@ function Button(props) {
 	// If the Button has a handleRoute prop, we want to render a button
 	if (props.handleRoute) {
 		button = (
-			<StyledButton onClick={props.handleRoute} xo={props.xo}  square={props.square}>
+			<StyledButton onClick={props.handleRoute} {...{xo, square, top, bottom, left, right}}>
 				{Children.toArray(props.children)}
 			</StyledButton>
 		)
@@ -38,7 +46,11 @@ Button.propTypes = {
 	onClick: PropTypes.func,
 	children: PropTypes.node,
 	xo: PropTypes.bool,
-	square: PropTypes.bool
+	square: PropTypes.bool,
+	top: PropTypes.number,
+	bottom: PropTypes.number,
+	left: PropTypes.number,
+	right: PropTypes.number
 }
 
 export default Button

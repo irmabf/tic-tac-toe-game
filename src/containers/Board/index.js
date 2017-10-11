@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import H2 from 'components/H2'
 import Button from 'components/Button'
@@ -13,9 +14,9 @@ import Game from '../Game'
 class Board extends Component {
 
 	setGameInfo() {
-			const { onePlayer, setFirstPlayerSymbol, setOnePlayer } = this.props
-			return (
-				!onePlayer ? (
+		const { step, setFirstPlayerSymbol, setOnePlayer } = this.props
+		return (
+				step === 1 ? (
 					<div>
 						<H2>
 							<FormattedMessage {...messages.heading} />
@@ -34,30 +35,36 @@ class Board extends Component {
 						<H2>
 							<FormattedMessage
 								{...messages.doYouWantPlay}
-								values={{ X: <b>{messages.x.defaultMessage}</b>, Y: <b>{messages.y.defaultMessage}</b>}}
+								values={{ X: <b>{messages.x.defaultMessage}</b>, Y: <b>{messages.y.defaultMessage}</b> }}
 							/>
 						</H2>
 						<Actions>
-							<Button onClick={() => setFirstPlayerSymbol('X')} xo>
+							<Button onClick={() => setFirstPlayerSymbol(messages.x.defaultMessage)} xo>
 								<FormattedMessage {...messages.x} />
 							</Button>
-							<Button onClick={() => setFirstPlayerSymbol('O')} xo>
+							<Button onClick={() => setFirstPlayerSymbol(messages.y.defaultMessage)} xo>
 								<FormattedMessage {...messages.y} />
 							</Button>
 						</Actions>
 					</div>
 				)
-			)
+		)
 	}
 
 	render() {
-		const { onePlayer, firstPlayerSymbol, squares } = this.props
+		const { step } = this.props
 		return (
 			<BoardContainer>
-				{onePlayer && firstPlayerSymbol  ? (<Game squares={squares} />) : (this.setGameInfo(onePlayer))}
+				{step > 2 ? (<Game />) : (this.setGameInfo())}
 			</BoardContainer>
 		)
 	}
+}
+
+Board.propTypes = {
+	step: PropTypes.number.isRequired,
+	setFirstPlayerSymbol: PropTypes.func.isRequired,
+	setOnePlayer: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({

@@ -1,4 +1,5 @@
 import { css } from 'styled-components'
+import { margin } from '../../style-utils'
 
 const buttonStyles = css`
 	position: relative;
@@ -50,14 +51,15 @@ const buttonStyles = css`
 		border-radius: 0;
 		float: left;
 		min-width: 140px;
-		min-height: 50px;
-		margin-right: -2px;
-		margin-top: -2px;
+		height: 50px;
+		line-height: 50px;
 		
 		&:hover {
 			z-index: 999
 		}
 	`}
+	
+	${(props) => margin(props.top, props.right, props.bottom, props.left)}
 
 `
 
