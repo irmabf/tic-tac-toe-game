@@ -1,15 +1,10 @@
 import styled from 'styled-components'
 
 const BoardContainer = styled.div`
-	padding: 15px;
 	background-color: #FFFFFF;
-	max-width: 100%;
-	min-height: 300px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin: 0 auto;
+	text-align: center;
+	padding: 20px 20px 50px 20px;
+	margin: 0 auto 40px auto;
 	
 	@media (min-width: 480px) {
 		width: 450px;

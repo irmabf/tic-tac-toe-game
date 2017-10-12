@@ -24,5 +24,29 @@ export default defineMessages({
 	y: {
 		id: 'tic-tac-toe.containers.Board.y',
 		defaultMessage: 'Y'
+	},
+	reset: {
+		id: 'tic-tac-toe.containers.Board.reset',
+		defaultMessage: 'Reset'
+	},
+	turn: {
+		id: 'tic-tac-toe.containers.Board.turn',
+		defaultMessage: 'It\'s {who} turn'
+	},
+	your: {
+		id: 'tic-tac-toe.containers.Board.your',
+		defaultMessage: 'your'
+	},
+	computer: {
+		id: 'tic-tac-toe.containers.Board.computer',
+		defaultMessage: 'computer'
+	},
+	theWinneIs: {
+		id: 'tic-tac-toe.containers.Board.theWinneIs',
+		defaultMessage: 'The winner is...{winner}'
+	},
+	draw: {
+		id: 'tic-tac-toe.containers.Board.draw',
+		defaultMessage: 'It\'s a Draw'
 	}
 })

@@ -11,5 +11,14 @@
 export function margin(top = 0, right = 0, bottom = 0, left = 0) {
 	return `
     margin: ${top}px ${right}px ${bottom}px ${left}px;
-  `;
+  `
 }
+
+export const clearfix = () => (`
+	&:before, &:after {
+		content: '';
+    display: table;
+    width: 100%;
+    position: relative
+	}
+`)

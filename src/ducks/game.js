@@ -3,7 +3,7 @@ const initialState = {
 	squares: Array(9).fill(null),
 	firstPlayerSymbol: '',
 	secondPlayerSymbol: '',
-	firstPlayerTurn: true,
+	currentPlayer: '',
 	step: 1
 }
 
@@ -16,17 +16,24 @@ export default function reducer(state = initialState, { payload, type }) {
 				step: 2
 			}
 		case actions.SET_FIRST_PLAYER_SYMBOL:
-			return {
-				...state,
-				firstPlayerSymbol: payload.symbol,
-				secondPlayerSymbol: payload.symbol === 'X' ? 'Y' : 'X',
-				step: 3
+			{
+				const secondPlayerSymbol = payload.symbol === 'X' ? 'Y' : 'X'
+				return {
+					...state,
+					firstPlayerSymbol: payload.symbol,
+					secondPlayerSymbol,
+					currentPlayer: state.onePlayer ? secondPlayerSymbol : payload.symbol,
+					step: 3
+				}
 			}
 		case actions.SET_SQUARE_VAL:
-			return {
-				...state,
-				squares: payload.squares,
-				firstPlayerTurn: payload.firstPlayerTurn
+			{
+				const changePlayer = state.currentPlayer === 'X' ? 'Y' : 'X'
+				return {
+					...state,
+					squares: payload.squares,
+					currentPlayer: state.step === 3 ? changePlayer : state.currentPlayer
+				}
 			}
 		case actions.SET_WINNER:
 			return { ...state, step: 4 }
@@ -55,9 +62,9 @@ export const actions = {
 		type: actions.SET_FIRST_PLAYER_SYMBOL,
 		payload: { symbol }
 	}),
-	setSquareVal: (squares, firstPlayerTurn) => ({
+	setSquareVal: (squares) => ({
 		type: actions.SET_SQUARE_VAL,
-		payload: { squares, firstPlayerTurn }
+		payload: { squares }
 	}),
 	resetGame: () => ({
 		type: actions.RESET

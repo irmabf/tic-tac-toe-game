@@ -5,32 +5,35 @@ import PropTypes from 'prop-types'
 
 import H2 from 'components/H2'
 import Button from 'components/Button'
+import Game from '../Game'
 import { actions } from '../../ducks/game'
 import BoardContainer from './BoardContainer'
-import Actions from './Actions'
+import Status from './Status'
 import messages from './messages'
-import Game from '../Game'
 
 class Board extends Component {
 
-	setGameInfo() {
-		const { step, setFirstPlayerSymbol, setOnePlayer } = this.props
-		return (
-				step === 1 ? (
+	getContent() {
+		const { step } = this.props
+		let content
+		switch (step) {
+			case 1:
+				content = (
 					<div>
 						<H2>
 							<FormattedMessage {...messages.heading} />
 						</H2>
-						<Actions>
-							<Button onClick={() => setOnePlayer(true)}>
-								<FormattedMessage {...messages.onePlayer} />
-							</Button>
-							<Button onClick={() => setOnePlayer(false)}>
-								<FormattedMessage {...messages.twoPlayers} />
-							</Button>
-						</Actions>
+						<Button onClick={() => this.props.handleSetOnePlayer(true)}>
+							<FormattedMessage {...messages.onePlayer} />
+						</Button>
+						<Button onClick={() => this.props.handleSetOnePlayer(false)}>
+							<FormattedMessage {...messages.twoPlayers} />
+						</Button>
 					</div>
-				) : (
+				)
+				break
+			case 2:
+				content = (
 					<div>
 						<H2>
 							<FormattedMessage
@@ -38,33 +41,43 @@ class Board extends Component {
 								values={{ X: <b>{messages.x.defaultMessage}</b>, Y: <b>{messages.y.defaultMessage}</b> }}
 							/>
 						</H2>
-						<Actions>
-							<Button onClick={() => setFirstPlayerSymbol(messages.x.defaultMessage)} xo>
-								<FormattedMessage {...messages.x} />
-							</Button>
-							<Button onClick={() => setFirstPlayerSymbol(messages.y.defaultMessage)} xo>
-								<FormattedMessage {...messages.y} />
-							</Button>
-						</Actions>
+						<Button onClick={() => this.props.handleSetFirstPlayerSymbol(messages.x.defaultMessage)} xo>
+							<FormattedMessage {...messages.x} />
+						</Button>
+						<Button onClick={() => this.props.handleSetFirstPlayerSymbol(messages.y.defaultMessage)} xo>
+							<FormattedMessage {...messages.y} />
+						</Button>
 					</div>
 				)
-		)
+				break
+			default:
+				content = (
+					<div>
+						<Status {...this.props} />
+						<Game computerTurn={() => this.computerTurn()} handleClick={() => this.handleClick()} />
+						<Button top={20} onClick={() => this.props.handleResetGame()}>
+							<FormattedMessage {...messages.reset} />
+						</Button>
+					</div>
+				)
+		}
+		return content
 	}
 
 	render() {
-		const { step } = this.props
 		return (
 			<BoardContainer>
-				{step > 2 ? (<Game />) : (this.setGameInfo())}
+				{this.getContent()}
 			</BoardContainer>
 		)
 	}
 }
 
 Board.propTypes = {
-	step: PropTypes.number.isRequired,
-	setFirstPlayerSymbol: PropTypes.func.isRequired,
-	setOnePlayer: PropTypes.func.isRequired
+	handleSetFirstPlayerSymbol: PropTypes.func.isRequired,
+	handleSetOnePlayer: PropTypes.func.isRequired,
+	handleResetGame: PropTypes.func.isRequired,
+	step: PropTypes.number.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -72,8 +85,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-	setOnePlayer: actions.setOnePlayer,
-	setFirstPlayerSymbol: actions.setFirstPlayerSymbol
+	handleSetOnePlayer: actions.setOnePlayer,
+	handleSetFirstPlayerSymbol: actions.setFirstPlayerSymbol,
+	handleResetGame: actions.resetGame
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)

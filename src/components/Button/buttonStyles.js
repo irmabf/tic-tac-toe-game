@@ -49,10 +49,12 @@ const buttonStyles = css`
 	${(props) => props.square && `
 		border: 2px solid #999;
 		border-radius: 0;
-		float: left;
-		min-width: 140px;
 		height: 50px;
 		line-height: 50px;
+		display: flex;
+		justify-content: center;
+		flex: 1;
+		padding: 0;
 		
 		&:hover {
 			z-index: 999

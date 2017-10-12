@@ -1,65 +1,15 @@
-import React, { Component } from 'react'
-import { FormattedMessage } from 'react-intl'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import H2 from 'components/H2'
-import Button from 'components/Button'
 import Square from 'components/Square'
 import { actions } from '../../ducks/game'
 import Row from './Row'
-import messages from './messages'
 
+class Game extends PureComponent {
 
-class Game extends Component {
-	getTurn() {
-		const { onePlayer, firstPlayerTurn } = this.props
-		return (
-			onePlayer ? (
-				<H2>
-					<FormattedMessage
-						{...messages.turn}
-						values={{ who: <b>
-							{firstPlayerTurn ? messages.your.defaultMessage : messages.computer.defaultMessage}
-						</b> }}
-					/>
-				</H2>
-			) : (
-				<H2>
-					<FormattedMessage
-						{...messages.turn}
-						values={{ who: <b>{this.currentPlayer(firstPlayerTurn)}</b> }}
-					/>
-				</H2>
-			)
-		)
-	}
-
-	getInfoMessage() {
-		const { step, firstPlayerTurn } = this.props
-		let message
-		switch (step) {
-			case 4:
-				message = (
-					<H2>
-						<FormattedMessage
-							{...messages.theWinneIs}
-							values={{ winner: this.currentPlayer(!firstPlayerTurn) }}
-						/>
-					</H2>
-				)
-				break
-			case 5:
-				message = (
-					<H2>
-						<FormattedMessage {...messages.draw} />
-					</H2>
-				)
-				break
-			default:
-				message = this.getTurn()
-		}
-		return message
+	isDraw(squares) {
+		return squares.every((item) => Boolean(item))
 	}
 
 	isWinner(squares) {
@@ -87,41 +37,83 @@ class Game extends Component {
 		return false
 	}
 
-	isDraw(squares) {
-		return squares.every((item) => Boolean(item))
+	isWinnerOrDraw(squares) {
+		const { handleSetWinner, handleSetDraw } = this.props
+		let result = false
+
+		if (this.isWinner(squares)) {
+			result = handleSetWinner()
+		} else if (this.isDraw(squares)) {
+			result = handleSetDraw()
+		}
+
+		return result
 	}
 
-	currentPlayer(firstPlayerTurn) {
-		const { firstPlayerSymbol, secondPlayerSymbol } = this.props
-		return firstPlayerTurn ? firstPlayerSymbol : secondPlayerSymbol
-	}
-
-	handleClick(i) {
-		const {
-			squares,
-			step,
-			handleSetWinner,
-			handleSetDraw,
-			handleSetSquareVal,
-			firstPlayerTurn
-		} = this.props
-
+	computerTurn() {
+		const { squares, step, currentPlayer, secondPlayerSymbol, handleSetSquareVal } = this.props
 		const newSquares = squares.slice()
 
-		if (newSquares[i] || step === 4) {
+		if (step === 4 || step === 5 || currentPlayer !== secondPlayerSymbol) {
 			return false
 		}
 
-		newSquares[i] = this.currentPlayer(firstPlayerTurn)
+		const computerChoice = this.miniMax(newSquares)
+		newSquares[computerChoice] = currentPlayer
 
-		if (this.isWinner(newSquares)) {
-			handleSetWinner()
-		} else if (this.isDraw(newSquares)) {
-			handleSetDraw()
+		this.isWinnerOrDraw(newSquares)
+
+		return handleSetSquareVal(newSquares)
+	}
+
+	miniMax(squares) {
+		const { firstPlayerSymbol, secondPlayerSymbol } = this.props
+		const possibleMoves = []
+
+		squares.filter((item, i) => !item ? possibleMoves.push(i) : null)
+
+
+		const bestChoice = possibleMoves.map((move) => {
+			let score = -10
+			const nextMove = squares.slice(0)
+
+			nextMove[move] = secondPlayerSymbol
+
+			if (this.isWinner(nextMove)) {
+				score = 10
+			} else {
+				nextMove[move] = firstPlayerSymbol
+				if (this.isWinner(nextMove)) {
+					score = 0
+				}
+			}
+
+			return { score, square: move }
+		})
+
+		const items = bestChoice.reduce((acc, val) => {
+			if (!acc.length || val.score > acc[0].score) return [val]
+			if (val.score === acc[0].score) return acc.concat(val)
+			return acc
+		}, [])
+
+		return items[Math.floor(Math.random() * items.length)].square
+	}
+
+	handleClick(i) {
+		const { squares, step, handleSetSquareVal, currentPlayer, firstPlayerSymbol, onePlayer } = this.props
+
+		const newSquares = squares.slice()
+
+		if (newSquares[i] || step === 4 || step === 5 || (onePlayer && currentPlayer !== firstPlayerSymbol)) {
+			return false
 		}
 
-		handleSetSquareVal(newSquares, !firstPlayerTurn)
-		return true
+		newSquares[i] = currentPlayer
+
+		this.isWinnerOrDraw(newSquares)
+
+		return handleSetSquareVal(newSquares)
 	}
 
 	renderSquare(i) {
@@ -135,46 +127,42 @@ class Game extends Component {
 	}
 
 	render() {
-		const { handleResetGame } = this.props
+		const { onePlayer, currentPlayer, secondPlayerSymbol } = this.props
+		if (onePlayer && currentPlayer === secondPlayerSymbol) {
+			setTimeout(() => this.computerTurn(), 1000)
+		}
 		return (
 			<div>
-				{this.getInfoMessage()}
-				<div>
-					<Row>
-						{this.renderSquare(0)}
-						{this.renderSquare(1)}
-						{this.renderSquare(2)}
-					</Row>
-					<Row>
-						{this.renderSquare(3)}
-						{this.renderSquare(4)}
-						{this.renderSquare(5)}
-					</Row>
-					<Row>
-						{this.renderSquare(6)}
-						{this.renderSquare(7)}
-						{this.renderSquare(8)}
-					</Row>
-				</div>
-				<Button top={20} onClick={() => handleResetGame()}>
-					<FormattedMessage {...messages.reset} />
-				</Button>
+				<Row>
+					{this.renderSquare(0)}
+					{this.renderSquare(1)}
+					{this.renderSquare(2)}
+				</Row>
+				<Row>
+					{this.renderSquare(3)}
+					{this.renderSquare(4)}
+					{this.renderSquare(5)}
+				</Row>
+				<Row>
+					{this.renderSquare(6)}
+					{this.renderSquare(7)}
+					{this.renderSquare(8)}
+				</Row>
 			</div>
 		)
 	}
 }
 
 Game.propTypes = {
-	handleResetGame: PropTypes.func.isRequired,
+	squares: PropTypes.array.isRequired,
+	currentPlayer: PropTypes.string.isRequired,
+	onePlayer: PropTypes.bool.isRequired,
+	firstPlayerSymbol: PropTypes.string.isRequired,
+	secondPlayerSymbol: PropTypes.string.isRequired,
 	handleSetSquareVal: PropTypes.func.isRequired,
 	handleSetWinner: PropTypes.func.isRequired,
 	handleSetDraw: PropTypes.func.isRequired,
-	firstPlayerTurn: PropTypes.bool.isRequired,
-	firstPlayerSymbol: PropTypes.string.isRequired,
-	secondPlayerSymbol: PropTypes.string.isRequired,
-	squares: PropTypes.array.isRequired,
-	onePlayer: PropTypes.bool.isRequired,
-	step: PropTypes.number.isRequired
+	step: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -182,11 +170,12 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
+	handleSetOnePlayer: actions.setOnePlayer,
+	handleSetFirstPlayerSymbol: actions.setFirstPlayerSymbol,
 	handleResetGame: actions.resetGame,
 	handleSetSquareVal: actions.setSquareVal,
 	handleSetWinner: actions.setWinner,
-	handleSetDraw: actions.setDraw
+	handleSetDraw: actions.setDraw,
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game)
