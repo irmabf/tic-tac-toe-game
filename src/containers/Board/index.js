@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import FormattedMarkdownMessage from 'components/FormattedMarkdownMessage'
 import H2 from 'components/H2'
 import Button from 'components/Button'
 import Game from '../Game'
 import { actions } from '../../ducks/game'
-import BoardContainer from './BoardContainer'
+import BoardWrapper from './BoardWrapper'
 import Status from './Status'
 import messages from './messages'
 
@@ -21,13 +21,13 @@ class Board extends Component {
 				content = (
 					<div>
 						<H2>
-							<FormattedMessage {...messages.heading} />
+							<FormattedMarkdownMessage {...messages.heading} />
 						</H2>
-						<Button onClick={() => this.props.handleSetOnePlayer(true)}>
-							<FormattedMessage {...messages.onePlayer} />
+						<Button onClick={() => this.props.handleSetOnePlayer(true)} bottom={10}>
+							<FormattedMarkdownMessage {...messages.onePlayer} />
 						</Button>
-						<Button onClick={() => this.props.handleSetOnePlayer(false)}>
-							<FormattedMessage {...messages.twoPlayers} />
+						<Button onClick={() => this.props.handleSetOnePlayer(false)} bottom={10}>
+							<FormattedMarkdownMessage {...messages.twoPlayers} />
 						</Button>
 					</div>
 				)
@@ -36,16 +36,16 @@ class Board extends Component {
 				content = (
 					<div>
 						<H2>
-							<FormattedMessage
+							<FormattedMarkdownMessage
 								{...messages.doYouWantPlay}
-								values={{ X: <b>{messages.x.defaultMessage}</b>, Y: <b>{messages.y.defaultMessage}</b> }}
+								values={{ X: messages.x.defaultMessage, Y: messages.y.defaultMessage }}
 							/>
 						</H2>
-						<Button onClick={() => this.props.handleSetFirstPlayerSymbol(messages.x.defaultMessage)} xo>
-							<FormattedMessage {...messages.x} />
+						<Button onClick={() => this.props.handleSetFirstPlayerSymbol(messages.x.defaultMessage)} xo bottom={10}>
+							<FormattedMarkdownMessage {...messages.x} />
 						</Button>
-						<Button onClick={() => this.props.handleSetFirstPlayerSymbol(messages.y.defaultMessage)} xo>
-							<FormattedMessage {...messages.y} />
+						<Button onClick={() => this.props.handleSetFirstPlayerSymbol(messages.y.defaultMessage)} xo bottom={10}>
+							<FormattedMarkdownMessage {...messages.y} />
 						</Button>
 					</div>
 				)
@@ -56,7 +56,7 @@ class Board extends Component {
 						<Status {...this.props} />
 						<Game computerTurn={() => this.computerTurn()} handleClick={() => this.handleClick()} />
 						<Button top={20} onClick={() => this.props.handleResetGame()}>
-							<FormattedMessage {...messages.reset} />
+							<FormattedMarkdownMessage {...messages.reset} />
 						</Button>
 					</div>
 				)
@@ -66,9 +66,9 @@ class Board extends Component {
 
 	render() {
 		return (
-			<BoardContainer>
+			<BoardWrapper>
 				{this.getContent()}
-			</BoardContainer>
+			</BoardWrapper>
 		)
 	}
 }

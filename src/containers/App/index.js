@@ -1,22 +1,29 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
+import Screen from 'components/Screen'
 import HomePage from 'containers/HomePage/Loadable'
 
 const AppWrapper = styled.div`
-	max-width: calc(768px + 16px * 2);
-	margin: 0 auto;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
 	display: flex;
-	min-height: 100%;
-	padding: 0 16px;
 	flex-direction: column;
+	overflow-y: auto;
 `
 
 export default function App() {
 	return (
 		<AppWrapper>
-			<Route exact path='/' component={HomePage} />
+			<Screen>
+				<Switch>
+					<Route exact path='/' component={HomePage} />
+				</Switch>
+			</Screen>
 		</AppWrapper>
 	)
 }

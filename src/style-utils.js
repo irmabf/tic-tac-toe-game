@@ -14,6 +14,10 @@ export function margin(top = 0, right = 0, bottom = 0, left = 0) {
   `
 }
 
+
+/**
+ * @description Returns a function that forces the element to self-clear its children
+ */
 export const clearfix = () => (`
 	&:before, &:after {
 		content: '';
@@ -21,4 +25,15 @@ export const clearfix = () => (`
     width: 100%;
     position: relative
 	}
+`)
+
+/**
+ * @description Returns a function that forces the element to have a full height
+ */
+export const fullHeight = () => (`
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
 `)

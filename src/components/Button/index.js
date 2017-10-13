@@ -23,7 +23,7 @@ function Button({
 }) {
 	// Render an anchor tag
 	let button = (
-		<A href={props.href} onClick={props.onClick} {...{xo, square, top, bottom, left, right}}>
+		<A href={props.href} onClick={props.onClick} {...{ xo, square, top, bottom, left, right }}>
 			{Children.toArray(props.children)}
 		</A>
 	)
@@ -31,7 +31,7 @@ function Button({
 	// If the Button has a handleRoute prop, we want to render a button
 	if (props.handleRoute) {
 		button = (
-			<StyledButton onClick={props.handleRoute} {...{xo, square, top, bottom, left, right}}>
+			<StyledButton onClick={props.handleRoute} {...{ xo, square, top, bottom, left, right }}>
 				{Children.toArray(props.children)}
 			</StyledButton>
 		)

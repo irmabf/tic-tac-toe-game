@@ -1,27 +1,33 @@
 import React, { Component } from 'react'
-import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
 
 import H2 from 'components/H2'
+import FormattedMarkdownMessage from 'components/FormattedMarkdownMessage'
 import messages from './messages'
 
 class Status extends Component {
 
 	getInfoMessage() {
-		const { step, currentPlayer } = this.props
+		const { step, onePlayer, currentPlayer, firstPlayerSymbol, secondPlayerSymbol } = this.props
 		let message
 		switch (step) {
-			case 4:
+			case 4: {
+				const onePlayerWinner =
+					currentPlayer === firstPlayerSymbol ? messages.you.defaultMessage : messages.computer.defaultMessage
+				const playerWinner =
+					currentPlayer === firstPlayerSymbol ? firstPlayerSymbol : secondPlayerSymbol
+				const winner = onePlayer ? onePlayerWinner : playerWinner
 				message = (
-					<FormattedMessage
+					<FormattedMarkdownMessage
 						{...messages.theWinneIs}
-						values={{ winner: currentPlayer }}
+						values={{ winner: `<strong>${winner}</strong>` }}
 					/>
 				)
+			}
 				break
 			case 5:
 				message = (
-					<FormattedMessage {...messages.draw} />
+					<FormattedMarkdownMessage {...messages.draw} />
 				)
 				break
 			default:
@@ -34,16 +40,16 @@ class Status extends Component {
 		const { onePlayer, currentPlayer, firstPlayerSymbol } = this.props
 		return (
 			onePlayer ? (
-				<FormattedMessage
+				<FormattedMarkdownMessage
 					{...messages.turn}
-					values={{ who: <b>
-						{currentPlayer === firstPlayerSymbol ? messages.your.defaultMessage : messages.computer.defaultMessage}
-					</b> }}
+					values={{ who:
+						currentPlayer === firstPlayerSymbol ? messages.your.defaultMessage : messages.computer.defaultMessage
+					}}
 				/>
 			) : (
-				<FormattedMessage
+				<FormattedMarkdownMessage
 					{...messages.turn}
-					values={{ who: <b>{currentPlayer}</b> }}
+					values={{ who: currentPlayer }}
 				/>
 			)
 		)
@@ -60,7 +66,8 @@ Status.propTypes = {
 	step: PropTypes.number.isRequired,
 	currentPlayer: PropTypes.string.isRequired,
 	onePlayer: PropTypes.bool.isRequired,
-	firstPlayerSymbol: PropTypes.string.isRequired
+	firstPlayerSymbol: PropTypes.string.isRequired,
+	secondPlayerSymbol: PropTypes.string.isRequired
 }
 
 export default Status

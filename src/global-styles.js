@@ -5,10 +5,9 @@ injectGlobal`
 	html, body {
 		box-sizing: border-box;
 		height: 100%;
-		min-height: 100%;
 		padding: 0;
 		margin: 0;
-		overflow:hidden;
+		overflow: hidden;
 }
 	html {
     cursor: default;
@@ -24,11 +23,13 @@ injectGlobal`
     line-height: 1.5em;
   }
   #root {
-   	background-color: #fafafa;
-    min-height: 100%;
-    min-width: 100%;
+   	height: 100%;
     color: white;
+    background-color: #fafafa;
 		background: linear-gradient(20deg,rgb(219,112,147),#daa357);
 		box-shadow: 0 2px 20px rgba(0,0,0,0.17);
+  }
+  strong {
+  	color: #444444
   }
 `
