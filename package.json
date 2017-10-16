@@ -16,6 +16,7 @@
   "engines": {
     "node": ">=8.1.4"
   },
+  "pre-commit": "lint",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "bootstrap-sass": "3.3.7",
@@ -55,6 +56,7 @@
     "babel-preset-stage-0": "6.16.0",
     "circular-dependency-plugin": "^4.2.0",
     "css-loader": "0.25.0",
+    "enzyme": "^3.1.0",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "15.0.1",
     "eslint-config-airbnb-base": "11.2.0",
@@ -68,6 +70,7 @@
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
     "image-webpack-loader": "^3.4.2",
+    "jest": "^21.2.1",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
     "style-loader": "0.16.1",
@@ -79,6 +82,8 @@
     "build": "npm run clean && webpack --config webpack.prod.js",
     "clean": "rimraf ./dist/*",
     "lint": "eslint ./src",
-    "lint:watch": "esw --watch ./src"
+    "lint:watch": "esw --watch ./src",
+    "test": "jest",
+    "prepush": "npm run test && npm run lint"
   }
 }
