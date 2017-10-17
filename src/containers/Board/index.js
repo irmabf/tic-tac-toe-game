@@ -14,7 +14,7 @@ import messages from './messages'
 class Board extends Component {
 
 	getContent() {
-		const { step } = this.props
+		const { step, handleSetFirstPlayerSymbol, handleSetOnePlayer, handleResetGame } = this.props
 		let content
 		switch (step) {
 			case 1:
@@ -23,10 +23,10 @@ class Board extends Component {
 						<H2>
 							<FormattedMarkdownMessage {...messages.heading} />
 						</H2>
-						<Button onClick={() => this.props.handleSetOnePlayer(true)} bottom={10}>
+						<Button onClick={() => handleSetOnePlayer(true)} bottom={10}>
 							<FormattedMarkdownMessage {...messages.onePlayer} />
 						</Button>
-						<Button onClick={() => this.props.handleSetOnePlayer(false)} bottom={10}>
+						<Button onClick={() => handleSetOnePlayer(false)} bottom={10}>
 							<FormattedMarkdownMessage {...messages.twoPlayers} />
 						</Button>
 					</div>
@@ -41,10 +41,10 @@ class Board extends Component {
 								values={{ X: messages.x.defaultMessage, Y: messages.y.defaultMessage }}
 							/>
 						</H2>
-						<Button onClick={() => this.props.handleSetFirstPlayerSymbol(messages.x.defaultMessage)} xo bottom={10}>
+						<Button onClick={() => handleSetFirstPlayerSymbol(messages.x.defaultMessage)} xo bottom={10}>
 							<FormattedMarkdownMessage {...messages.x} />
 						</Button>
-						<Button onClick={() => this.props.handleSetFirstPlayerSymbol(messages.y.defaultMessage)} xo bottom={10}>
+						<Button onClick={() => handleSetFirstPlayerSymbol(messages.y.defaultMessage)} xo bottom={10}>
 							<FormattedMarkdownMessage {...messages.y} />
 						</Button>
 					</div>
@@ -55,7 +55,7 @@ class Board extends Component {
 					<div>
 						<Status {...this.props} />
 						<Game computerTurn={() => this.computerTurn()} handleClick={() => this.handleClick()} />
-						<Button top={20} onClick={() => this.props.handleResetGame()}>
+						<Button top={20} onClick={() => handleResetGame()}>
 							<FormattedMarkdownMessage {...messages.reset} />
 						</Button>
 					</div>
@@ -84,7 +84,7 @@ const mapStateToProps = (state) => ({
 	...state.game
 })
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
 	handleSetOnePlayer: actions.setOnePlayer,
 	handleSetFirstPlayerSymbol: actions.setFirstPlayerSymbol,
 	handleResetGame: actions.resetGame

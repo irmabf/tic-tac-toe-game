@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Board /> <Board /> renders correctly 1`] = `
+<div
+  className="BoardWrapper-brevKX gIZNep"
+>
+  <div>
+    <h2
+      className="H2-edqtgr NFMjd"
+    >
+      <span
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "How do you want to play?",
+          }
+        }
+      />
+    </h2>
+    <a
+      className="A-jrLLFi jpbFUk"
+      href={undefined}
+      onClick={[Function]}
+    >
+      <span
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "One Player",
+          }
+        }
+      />
+    </a>
+    <a
+      className="A-jrLLFi jpbFUk"
+      href={undefined}
+      onClick={[Function]}
+    >
+      <span
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "Two Playes",
+          }
+        }
+      />
+    </a>
+  </div>
+</div>
+`;

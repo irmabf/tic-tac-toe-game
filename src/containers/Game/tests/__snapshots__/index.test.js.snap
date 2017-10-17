@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Game /> <Game /> renders correctly 1`] = `
+<div>
+  <div
+    className="Row-guwMhk gMaEAB"
+  >
+    <a
+      className="A-jrLLFi iAHREn"
+      href={undefined}
+      onClick={[Function]}
+    />
+    <a
+      className="A-jrLLFi iAHREn"
+      href={undefined}
+      onClick={[Function]}
+    />
+    <a
+      className="A-jrLLFi iAHREn"
+      href={undefined}
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="Row-guwMhk gMaEAB"
+  >
+    <a
+      className="A-jrLLFi iAHREn"
+      href={undefined}
+      onClick={[Function]}
+    />
+    <a
+      className="A-jrLLFi iAHREn"
+      href={undefined}
+      onClick={[Function]}
+    />
+    <a
+      className="A-jrLLFi iAHREn"
+      href={undefined}
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="Row-guwMhk gMaEAB"
+  >
+    <a
+      className="A-jrLLFi iAHREn"
+      href={undefined}
+      onClick={[Function]}
+    />
+    <a
+      className="A-jrLLFi iAHREn"
+      href={undefined}
+      onClick={[Function]}
+    />
+    <a
+      className="A-jrLLFi iAHREn"
+      href={undefined}
+      onClick={[Function]}
+    />
+  </div>
+</div>
+`;

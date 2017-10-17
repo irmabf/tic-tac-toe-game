@@ -1,6 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { mount } from 'enzyme'
+import renderer from 'react-test-renderer'
 
 import LanguageProvider from '../../../containers/LanguageProvider'
 import { translationMessages } from '../../../i18n'
@@ -20,5 +21,15 @@ describe('<Game />', () => {
 		)
 		expect(renderedComponent.find(Row).length).toBe(3)
 	})
-})
 
+	it('<Game /> renders correctly', () => {
+		const tree = renderer.create(
+			<Provider store={store}>
+				<LanguageProvider messages={translationMessages}>
+					<Game />
+				</LanguageProvider>
+			</Provider>
+		).toJSON()
+		expect(tree).toMatchSnapshot()
+	})
+})
