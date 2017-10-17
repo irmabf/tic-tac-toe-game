@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -6,7 +6,7 @@ import Square from 'components/Square'
 import { actions } from '../../ducks/game'
 import Row from './Row'
 
-class Game extends PureComponent {
+class Game extends Component {
 
 	isDraw(squares) {
 		return squares.every((item) => Boolean(item))
