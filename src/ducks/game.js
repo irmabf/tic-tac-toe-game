@@ -74,5 +74,5 @@ export const actions = {
 	}),
 	setDraw: () => ({
 		type: actions.SET_DRAW
-	}),
+	})
 }

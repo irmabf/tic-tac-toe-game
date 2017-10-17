@@ -166,7 +166,7 @@ Game.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-	...state
+	...state.game
 })
 
 const mapDispatchToProps = {

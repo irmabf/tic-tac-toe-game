@@ -17,7 +17,7 @@ const root = document.getElementById('root')
 const render = (messages) => {
 	ReactDOM.render(
 		<Provider store={store}>
-			<LanguageProvider locale='en' messages={messages}>
+			<LanguageProvider messages={messages}>
 				<ConnectedRouter history={history}>
 					<App />
 				</ConnectedRouter>

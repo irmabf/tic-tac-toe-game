@@ -12,8 +12,7 @@ const FormattedMarkdownMessage = ({
 	intl: { formatMessage },
 	id,
 	defaultMessage,
-	values,
-	...props,
+	values
 }) => (
 	<span
 		dangerouslySetInnerHTML={{
@@ -21,7 +20,6 @@ const FormattedMarkdownMessage = ({
 				formatMessage({ id, defaultMessage }, values) || defaultMessage || id
 			),
 		}}
-		{...props}
 	/>
 )
 

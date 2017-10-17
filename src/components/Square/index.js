@@ -9,7 +9,7 @@ const Square = ({ value, onClick }) => (
 )
 
 Square.propTypes = {
-	value: PropTypes.string,
+	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onClick: PropTypes.func.isRequired
 }
 
