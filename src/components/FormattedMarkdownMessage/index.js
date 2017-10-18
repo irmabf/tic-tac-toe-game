@@ -1,4 +1,4 @@
-import React from 'preact-compat'
+import React from 'react'
 import { injectIntl, intlShape } from 'react-intl'
 import PropTypes from 'prop-types'
 import Remarkable from 'remarkable'

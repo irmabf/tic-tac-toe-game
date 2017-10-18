@@ -1,4 +1,4 @@
-import React from 'preact-compat'
+import React from 'react'
 import shallow from 'enzyme/shallow'
 
 import H1 from '../index'

@@ -1,4 +1,4 @@
-import React from 'preact-compat'
+import React from 'react'
 import Provider from 'react-redux/lib/components/Provider'
 import shallow from 'enzyme/shallow'
 import mount from 'enzyme/mount'

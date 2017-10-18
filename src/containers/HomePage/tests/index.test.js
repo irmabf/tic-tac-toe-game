@@ -2,7 +2,7 @@
  * Test the HomePage
  */
 
-import React from 'preact-compat'
+import React from 'react'
 import shallow from 'enzyme/shallow'
 import { FormattedMessage } from 'react-intl'
 

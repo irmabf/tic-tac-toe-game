@@ -1,4 +1,4 @@
-import React from 'preact-compat'
+import React from 'react'
 import mount from 'enzyme/mount'
 import Button from 'components/Button'
 

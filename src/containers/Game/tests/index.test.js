@@ -1,4 +1,4 @@
-import React from 'preact-compat'
+import React from 'react'
 import Provider from 'react-redux/lib/components/Provider'
 import mount from 'enzyme/mount'
 import renderer from 'react-test-renderer'

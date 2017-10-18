@@ -1,5 +1,5 @@
-import React, { Component } from 'preact-compat'
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import connect from 'react-redux/lib/connect/connect'
 import PropTypes from 'prop-types'
 
 import FormattedMarkdownMessage from 'components/FormattedMarkdownMessage'

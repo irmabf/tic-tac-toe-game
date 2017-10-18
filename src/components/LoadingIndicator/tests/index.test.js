@@ -1,4 +1,4 @@
-import React from 'preact-compat'
+import React from 'react'
 import { render } from 'enzyme'
 
 import LoadingIndicator from '../index'

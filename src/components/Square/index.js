@@ -1,4 +1,4 @@
-import React from 'preact-compat'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Button from 'components/Button'
 

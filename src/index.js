@@ -1,4 +1,5 @@
-import React, { render as DOMrender, unmountComponentAtNode } from 'preact-compat'
+import React from 'react'
+import { render as DOMrender, unmountComponentAtNode } from 'react-dom'
 import ConnectedRouter from 'react-router-redux/ConnectedRouter'
 import Provider from 'react-redux/lib/components/Provider'
 import createHistory from 'history/createBrowserHistory'

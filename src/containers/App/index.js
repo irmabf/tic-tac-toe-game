@@ -1,4 +1,4 @@
-import React from 'preact-compat'
+import React from 'react'
 import styled from 'styled-components'
 import Switch from 'react-router-dom/Switch'
 import Route from 'react-router-dom/Route'
