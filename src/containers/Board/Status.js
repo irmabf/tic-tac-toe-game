@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'preact-compat'
 import PropTypes from 'prop-types'
 
 import H2 from 'components/H2'

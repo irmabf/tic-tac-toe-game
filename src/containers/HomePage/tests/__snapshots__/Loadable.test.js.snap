@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loadable /> <Loadable /> renders correctly 1`] = `
+<div
+  className="Wrapper-dyuznp iPelRH"
+>
+  <div
+    className="Circle__CirclePrimitive-doUHun dKHgCb"
+  />
+  <div
+    className="Circle__CirclePrimitive-iczIjT euoBoJ"
+  />
+  <div
+    className="Circle__CirclePrimitive-cmIcdf dIjfue"
+  />
+  <div
+    className="Circle__CirclePrimitive-jOiEYJ emKgyW"
+  />
+  <div
+    className="Circle__CirclePrimitive-eAcCGr bEjFMn"
+  />
+  <div
+    className="Circle__CirclePrimitive-fQPULp jJmoTs"
+  />
+  <div
+    className="Circle__CirclePrimitive-egCDAQ jIAgSN"
+  />
+  <div
+    className="Circle__CirclePrimitive-kwRWka iNRhgM"
+  />
+  <div
+    className="Circle__CirclePrimitive-jnKZUF SVBFl"
+  />
+  <div
+    className="Circle__CirclePrimitive-jSRngu iklYyO"
+  />
+  <div
+    className="Circle__CirclePrimitive-gbjHSq iLEpFq"
+  />
+  <div
+    className="Circle__CirclePrimitive-blqIGF ecSHje"
+  />
+</div>
+`;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'preact-compat'
 
 import Circle from './Circle'
 import Wrapper from './Wrapper'

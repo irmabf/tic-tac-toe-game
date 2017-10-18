@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'preact-compat'
 import { defineMessages } from 'react-intl'
-import { Provider } from 'react-redux'
-import { mount } from 'enzyme'
+import Provider from 'react-redux/lib/components/Provider'
+import mount from 'enzyme/mount'
 
 import LanguageProvider from '../../../containers/LanguageProvider'
 import FormattedMarkdownMessage from '../index'

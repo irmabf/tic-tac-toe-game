@@ -6,9 +6,9 @@
  * IntlProvider component and i18n messages (loaded from `app/translations`)
  */
 
-import React from 'react'
+import React from 'preact-compat'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import connect from 'react-redux/lib/connect/connect'
 import { IntlProvider } from 'react-intl'
 
 export class LanguageProvider extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function

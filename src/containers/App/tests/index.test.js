@@ -1,6 +1,6 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-import { Route } from 'react-router-dom'
+import React from 'preact-compat'
+import shallow from 'enzyme/shallow'
+import Route from 'react-router-dom/Route'
 
 import App from '../index'
 

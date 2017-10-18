@@ -1,13 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { ConnectedRouter } from 'react-router-redux'
-import { Provider } from 'react-redux'
+import React, { render as DOMrender, unmountComponentAtNode } from 'preact-compat'
+import ConnectedRouter from 'react-router-redux/ConnectedRouter'
+import Provider from 'react-redux/lib/components/Provider'
 import createHistory from 'history/createBrowserHistory'
-import 'sanitize.css/sanitize.css'
 
 import LanguageProvider from 'containers/LanguageProvider'
+import App from 'containers/App'
 import store from './store'
-import App from './containers/App'
 import './global-styles'
 import { translationMessages } from './i18n'
 
@@ -15,7 +13,7 @@ const history = createHistory()
 const root = document.getElementById('root')
 
 const render = (messages) => {
-	ReactDOM.render(
+	DOMrender(
 		<Provider store={store}>
 			<LanguageProvider messages={messages}>
 				<ConnectedRouter history={history}>
@@ -33,7 +31,7 @@ if (module.hot) {
 	// modules.hot.accept does not accept dynamic dependencies,
 	// have to be constants at compile-time
 	module.hot.accept(['./i18n', 'containers/App'], () => {
-		ReactDOM.unmountComponentAtNode(root)
+		unmountComponentAtNode(root)
 		render(translationMessages)
 	})
 }

@@ -16,9 +16,9 @@ export default function reducer(state = initialState, { payload, type }) {
 export const actions = {
 	CHANGE_LOCALE: 'tic-tac-toe/Language/CHANGE_LOCALE',
 
-	changeLocale: (languageLocale) => ({
+	changeLocale: (locale) => ({
 		type: actions.CHANGE_LOCALE,
-		locale: { languageLocale }
+		payload: { locale }
 	})
 
 }

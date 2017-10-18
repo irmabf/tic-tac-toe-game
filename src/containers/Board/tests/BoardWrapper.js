@@ -1,5 +1,5 @@
-import React from 'react'
-import { shallow } from 'enzyme'
+import React from 'preact-compat'
+import shallow from 'enzyme/shallow'
 
 import BoardWrapper from '../BoardWrapper'
 

@@ -4,7 +4,7 @@
  * This will setup the i18n language files and locale data for your app.
  *
  */
-import { addLocaleData } from 'react-intl'
+import { addLocaleData } from 'react-intl/lib/index.es'
 import enLocaleData from 'react-intl/locale-data/en'
 import deLocaleData from 'react-intl/locale-data/de'
 

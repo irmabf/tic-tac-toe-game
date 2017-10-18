@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'preact-compat'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 

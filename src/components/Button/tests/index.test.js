@@ -2,8 +2,8 @@
  * Testing our Button component
  */
 
-import React from 'react'
-import { mount } from 'enzyme'
+import React from 'preact-compat'
+import mount from 'enzyme/mount'
 
 import Button from '../index'
 

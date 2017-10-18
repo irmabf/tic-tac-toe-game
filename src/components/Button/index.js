@@ -6,7 +6,7 @@
  * otherwise it'll render a link with an onclick
  */
 
-import React, { Children } from 'react'
+import React, { Children } from 'preact-compat'
 import PropTypes from 'prop-types'
 
 import A from './A'

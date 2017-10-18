@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'preact-compat'
 import styled from 'styled-components'
-import { Switch, Route } from 'react-router-dom'
+import Switch from 'react-router-dom/Switch'
+import Route from 'react-router-dom/Route'
 
 import Screen from 'components/Screen'
 import HomePage from 'containers/HomePage/Loadable'

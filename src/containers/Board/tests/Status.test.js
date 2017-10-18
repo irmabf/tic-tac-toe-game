@@ -1,6 +1,7 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import { shallow, mount } from 'enzyme'
+import React from 'preact-compat'
+import Provider from 'react-redux/lib/components/Provider'
+import shallow from 'enzyme/shallow'
+import mount from 'enzyme/mount'
 
 import LanguageProvider from '../../../containers/LanguageProvider'
 import H2 from '../../../components/H2'

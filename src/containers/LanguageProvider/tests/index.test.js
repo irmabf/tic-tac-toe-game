@@ -1,7 +1,8 @@
-import React from 'react'
-import { shallow, mount } from 'enzyme'
-import { FormattedMessage, defineMessages } from 'react-intl'
-import { Provider } from 'react-redux'
+import React from 'preact-compat'
+import shallow from 'enzyme/shallow'
+import mount from 'enzyme/mount'
+import { FormattedMessage, defineMessages } from 'react-intl/lib/index.es'
+import Provider from 'react-redux/lib/components/Provider'
 
 import ConnectedLanguageProvider, { LanguageProvider } from '../index'
 import store from '../../../store'

@@ -1,11 +1,16 @@
+const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CircularDependencyPlugin = require('circular-dependency-plugin')
 const common = require('./webpack.common.js')
 
 module.exports = merge(common, {
 	devtool: 'inline-source-map',
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: '[name].[hash].js',
+		publicPath: '/'
+	},
 	module: {
 		rules: [
 			{
@@ -21,18 +26,14 @@ module.exports = merge(common, {
 		hints: false
 	},
 	plugins: [
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('development')
+		}),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.NamedModulesPlugin(),
 		new CircularDependencyPlugin({
 			exclude: /a\.js|node_modules/,
 			failOnError: false
-		}),
-		new HtmlWebpackPlugin({
-			title: 'Tic Tac Toe Game',
-			template: 'public/index.html',
-			favicon: 'public/favicon.ico',
-			inject: true
 		})
 	]
 })
-

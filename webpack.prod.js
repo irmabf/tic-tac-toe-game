@@ -1,64 +1,76 @@
+const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CompressionPlugin = require('compression-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 const common = require('./webpack.common.js')
 
 module.exports = merge(common, {
-	devtool: 'source-map',
+	devtool: 'cheap-module-source-map',
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: '[name].[chunkhash].js',
+		publicPath: '/'
+	},
 	module: {
 		rules: [
 			{
 				test: /\.sass/,
 				use: ExtractTextPlugin.extract({
-					fallbackLoader: 'style-loader',
-					loader: ['css-loader', 'sass-loader'],
-					publicPath: '/dist'
+					use: [{
+						loader: 'css-loader'
+					}, {
+						loader: 'sass-loader'
+					}],
+					fallback: 'style-loader'
 				})
 			}
 		]
 	},
 	plugins: [
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('production')
+		}),
+		new webpack.optimize.ModuleConcatenationPlugin(),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendor',
+			filename: 'vendor.[chunkhash].js',
+			minChunks(module) {
+				return module.context && module.context.indexOf('node_modules') >= 0
+			}
+		}),
 		new webpack.optimize.UglifyJsPlugin({
 			compress: {
 				warnings: false,
-				comparisons: false
+				screw_ie8: true,
+				conditionals: true,
+				unused: true,
+				comparisons: true,
+				sequences: true,
+				dead_code: true,
+				evaluate: true,
+				if_return: true,
+				join_vars: true
 			},
 			output: {
-				comments: false,
-				ascii_only: true
-			},
-			exclude: [/\.min\.js$/gi]
-		}),
-		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: JSON.stringify('production')
+				comments: false
 			}
 		}),
-		new HtmlWebpackPlugin({
-			title: 'Tic Tac Toe Game',
-			template: 'public/index.html',
-			favicon: 'public/favicon.ico',
-			minify: {
-				removeComments: true,
-				collapseWhitespace: true,
-				removeRedundantAttributes: true,
-				useShortDoctype: true,
-				removeEmptyAttributes: true,
-				removeStyleLinkTypeAttributes: true,
-				keepClosingSlash: true,
-				minifyJS: true,
-				minifyCSS: true,
-				minifyURLs: true
-			},
-			inject: true
+		new webpack.HashedModuleIdsPlugin(),
+		// Ignore all other locals except [en]
+		// (https://webpack.js.org/plugins/context-replacement-plugin/)
+		new webpack.ContextReplacementPlugin(
+			/moment[\/\\]locale$/, // eslint-disable-line no-useless-escape
+			/de|en/
+		),
+		new ExtractTextPlugin({
+			filename: '[name].[contenthash].css',
+			allChunks: true
 		}),
-		new ExtractTextPlugin('[name][hash].css'),
 		new CompressionPlugin({
 			asset: '[path].gz[query]',
 			algorithm: 'gzip',
-			test: /\.js$|\.css$|\.html$/,
+			test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
 			threshold: 10240,
 			minRatio: 0.8
 		})
