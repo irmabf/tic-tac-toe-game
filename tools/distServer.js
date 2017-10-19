@@ -4,9 +4,10 @@ const path = require('path')
 
 /* eslint-disable no-console */
 
-const port = process.env.PORT || 3000
+const port = (process.env.PORT || 3000)
+const indexPath = path.join(process.cwd(), 'dist/index.html')
+const publicPath = express.static('dist')
 const app = express()
-
 
 app.get('*.js', (req, res, next) => {
 	req.url += '.gz'
@@ -14,10 +15,11 @@ app.get('*.js', (req, res, next) => {
 	next()
 })
 
-app.use(express.static('dist'))
+app.use(publicPath)
 app.get('/', (req, res) => {
-	res.sendFile(path.join(process.cwd(), 'dist/index.html'))
+	res.sendFile(indexPath)
 })
+
 
 app.listen(port, (err) => {
 	if (err) {
