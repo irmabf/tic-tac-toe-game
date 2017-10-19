@@ -101,6 +101,5 @@
     "lint:watch": "esw --watch ./src",
     "test:clean": "rimraf ./coverage",
     "test": "cross-env NODE_ENV=test jest --coverage"
-    // "prepush": "npm run test && npm run lint"
   }
 }
