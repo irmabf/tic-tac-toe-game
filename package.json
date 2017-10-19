@@ -36,6 +36,7 @@
     "express": "^4.16.2",
     "history": "^4.7.2",
     "intl": "1.2.5",
+    "node-sass": "^4.5.3",
     "open": "^0.0.5",
     "prop-types": "15.5.10",
     "react": "15.6.1",
@@ -52,9 +53,7 @@
     "redux-thunk": "^2.2.0",
     "remarkable": "^1.7.1",
     "rimraf": "^2.6.2",
-    "styled-components": "^2.2.0",
-    "webpack": "^3.8.1",
-    "webpack-hot-middleware": "^2.19.1"
+    "styled-components": "^2.2.0"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",
@@ -86,15 +85,15 @@
     "husky": "^0.14.3",
     "image-webpack-loader": "^3.4.2",
     "jest": "^21.2.1",
-    "node-sass": "^4.5.3",
     "path": "^0.12.7",
     "react-test-renderer": "15.6.1",
     "sass-loader": "^6.0.6",
     "style-loader": "0.16.1",
+    "webpack": "^3.8.1",
+    "webpack-hot-middleware": "^2.20.0",
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
-    "start": "npm run build && node tools/distServer.js",
     "dev": "webpack-dev-server --inline --hot --colors --progress --open --config webpack.dev.js",
     "build": "npm run clean && webpack --config webpack.prod.js",
     "postbuild": "node tools/distServer.js",
@@ -102,6 +101,8 @@
     "lint": "eslint ./src",
     "lint:watch": "esw --watch ./src",
     "test:clean": "rimraf ./coverage",
-    "test": "cross-env NODE_ENV=test jest --coverage"
+    "test": "cross-env NODE_ENV=test jest --coverage",
+    "postinstall": "npm run build",
+    "start": "node tools/distServer.js"
   }
 }
