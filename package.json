@@ -94,8 +94,7 @@
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
-    "prestart": "npm run build",
-    "start": "node tools/distServer.js",
+    "start": "npm run build && node tools/distServer.js",
     "dev": "webpack-dev-server --inline --hot --colors --progress --open --config webpack.dev.js",
     "build": "npm run clean && webpack --config webpack.prod.js",
     "postbuild": "node tools/distServer.js",
