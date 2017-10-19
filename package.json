@@ -52,7 +52,6 @@
     "remarkable": "^1.7.1",
     "rimraf": "^2.6.2",
     "styled-components": "^2.2.0",
-    "webpack-dev-server": "^2.9.2",
     "webpack-hot-middleware": "^2.19.1"
   },
   "devDependencies": {
@@ -94,7 +93,8 @@
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --inline --hot --colors --progress --open --config webpack.dev.js",
+    "start": "node tools/distServer.js",
+    "dev": "webpack-dev-server --inline --hot --colors --progress --open --config webpack.dev.js",
     "build": "npm run clean && webpack --config webpack.prod.js",
     "postbuild": "node tools/distServer.js",
     "clean": "rimraf ./dist/*",
