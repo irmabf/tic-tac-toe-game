@@ -102,7 +102,7 @@
     "lint:watch": "esw --watch ./src",
     "test:clean": "rimraf ./coverage",
     "test": "cross-env NODE_ENV=test jest --coverage",
-    "postinstall": "npm run build",
+    "postinstall": "npm install --dev && npm run build",
     "start": "node tools/distServer.js"
   }
 }
