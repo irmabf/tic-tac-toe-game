@@ -96,11 +96,11 @@
     "start": "webpack-dev-server --inline --hot --colors --progress --open --config webpack.dev.js",
     "build": "npm run clean && webpack --config webpack.prod.js",
     "postbuild": "node tools/distServer.js",
+    "prepush": "npm run test && npm run lint",
     "clean": "rimraf ./dist/*",
     "lint": "eslint ./src",
     "lint:watch": "esw --watch ./src",
     "test:clean": "rimraf ./coverage",
-    "test": "cross-env NODE_ENV=test jest --coverage",
-    "prepush": "npm run test && npm run lint"
+    "test": "cross-env NODE_ENV=test jest --coverage"
   }
 }
