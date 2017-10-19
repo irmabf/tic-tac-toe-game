@@ -67,6 +67,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "6.16.0",
     "circular-dependency-plugin": "^4.2.0",
+    "compression-webpack-plugin": "^1.0.1",
     "css-loader": "0.25.0",
     "enzyme": "2.8.2",
     "eslint": "3.19.0",
@@ -96,11 +97,11 @@
     "start": "webpack-dev-server --inline --hot --colors --progress --open --config webpack.dev.js",
     "build": "npm run clean && webpack --config webpack.prod.js",
     "postbuild": "node tools/distServer.js",
-    "prepush": "npm run test && npm run lint",
     "clean": "rimraf ./dist/*",
     "lint": "eslint ./src",
     "lint:watch": "esw --watch ./src",
     "test:clean": "rimraf ./coverage",
-    "test": "cross-env NODE_ENV=test jest --coverage"
+    "test": "cross-env NODE_ENV=test jest --coverage",
+    "prepush": "npm run test && npm run lint"
   }
 }
