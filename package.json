@@ -37,7 +37,6 @@
     "history": "^4.7.2",
     "intl": "1.2.5",
     "node-sass": "^4.5.3",
-    "open": "^0.0.5",
     "prop-types": "15.5.10",
     "react": "15.6.1",
     "react-dom": "15.6.1",
@@ -96,13 +95,14 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --colors --progress --open --config webpack.dev.js",
     "build": "npm run clean && webpack --config webpack.prod.js",
-    "postbuild": "node tools/distServer.js",
+    "postbuild": "node ./distServer.js",
     "clean": "rimraf ./dist/*",
     "lint": "eslint ./src",
     "lint:watch": "esw --watch ./src",
     "test:clean": "rimraf ./coverage",
     "test": "cross-env NODE_ENV=test jest --coverage",
-    "start": "node tools/distServer.js",
-    "postinstall": "npm run build"
+    "start": "node ./server.js",
+    "postinstall": "npm run build",
+    "prepush": "npm run test && npm run lint"
   }
 }
