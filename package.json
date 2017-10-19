@@ -90,7 +90,6 @@
     "sass-loader": "^6.0.6",
     "style-loader": "0.16.1",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "2.4.2",
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
@@ -101,7 +100,7 @@
     "lint": "eslint ./src",
     "lint:watch": "esw --watch ./src",
     "test:clean": "rimraf ./coverage",
-    "test": "cross-env NODE_ENV=test jest --coverage",
-    "prepush": "npm run test && npm run lint"
+    "test": "cross-env NODE_ENV=test jest --coverage"
+    // "prepush": "npm run test && npm run lint"
   }
 }
