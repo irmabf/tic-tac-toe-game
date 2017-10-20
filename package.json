@@ -102,6 +102,7 @@
     "test:clean": "rimraf ./coverage",
     "test": "cross-env NODE_ENV=test jest --coverage",
     "start": "node ./server.js",
+    "postinstall": "npm run clean && webpack --config webpack.prod.js",
     "prepush": "npm run test && npm run lint"
 
   }
