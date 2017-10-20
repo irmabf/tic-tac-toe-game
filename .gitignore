@@ -1,7 +1,6 @@
 ### JS ###
 coverage/
 node_modules/
-build/
 dist/
 *.log
 

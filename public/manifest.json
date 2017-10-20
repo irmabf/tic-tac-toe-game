@@ -1,6 +1,6 @@
 {
-  "short_name": "Todo Redux Saga",
-  "name": "Todo app with React, Redux, Redux-Saga, and Firebase",
+  "short_name": "Tic Tac Toe Game",
+  "name": "Tic Tac Toe Game, built with React, Redux, and Styled Components",
   "icons": [
     {
       "src": "favicon.ico",

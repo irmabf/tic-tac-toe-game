@@ -1,8 +1,12 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
 	entry: ['babel-polyfill', path.resolve(__dirname, './src/index.js')],
+	output: {
+		path: path.resolve(__dirname, './dist'),
+		publicPath: '/',
+	},
 	resolve: {
 		modules: ['src', 'node_modules'],
 		extensions: ['.js', '.jsx'],
@@ -11,6 +15,9 @@ module.exports = {
 			containers: path.resolve(__dirname, 'src/containers/')
 		}
 	},
+	plugins: [
+		new webpack.NamedModulesPlugin()
+	],
 	module: {
 		rules: [{
 			test: /\.js$/,
@@ -54,25 +61,9 @@ module.exports = {
 			]
 		}]
 	},
-	plugins: [
-		new HtmlWebpackPlugin({
-			title: 'Tic Tac Toe Game',
-			template: path.resolve(__dirname, './public/index.html'),
-			favicon: path.resolve(__dirname, './public/favicon.ico'),
-			path: path.join(__dirname, 'dist'),
-			filename: 'index.html',
-			minify: {
-				collapseWhitespace: true,
-				collapseInlineTagWhitespace: true,
-				removeComments: true,
-				removeRedundantAttributes: true
-			}
-		})
-	],
 	node: {
 		fs: 'empty',
 		net: 'empty',
-		tls: 'empty',
-		child_process: 'empty'
+		tls: 'empty'
 	}
 }

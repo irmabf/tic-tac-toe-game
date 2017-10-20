@@ -3,14 +3,14 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const common = require('./webpack.common.js')
 
 module.exports = merge(common, {
 	devtool: 'cheap-module-source-map',
 	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].[chunkhash].js',
-		publicPath: '/'
+		filename: '[name].[chunkhash].js'
 	},
 	module: {
 		rules: [
@@ -63,6 +63,21 @@ module.exports = merge(common, {
 			/moment[\/\\]locale$/, // eslint-disable-line no-useless-escape
 			/de|en/
 		),
+		new HtmlWebpackPlugin({
+			template: './public/index.html',
+			minify: {
+				removeComments: true,
+				collapseWhitespace: true,
+				removeRedundantAttributes: true,
+				useShortDoctype: true,
+				removeEmptyAttributes: true,
+				removeStyleLinkTypeAttributes: true,
+				keepClosingSlash: true,
+				minifyJS: true,
+				minifyCSS: true,
+				minifyURLs: true,
+			}
+		}),
 		new ExtractTextPlugin({
 			filename: '[name].[contenthash].css',
 			allChunks: true
@@ -73,6 +88,7 @@ module.exports = merge(common, {
 			test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
 			threshold: 10240,
 			minRatio: 0.8
-		})
+		}),
+		new CopyWebpackPlugin(['./public/manifest.json', './public/favicon.ico'])
 	]
 })
